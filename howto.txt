@@ -1,0 +1,8 @@
+0. Run ./0 and it tells you the secret.
+1. Run ltrace ./1 and convert the rand value to decimal and it tells you the secret.
+2. Run strace on 2 and found that all return values are 0. Looked up curlCode on google and found CURLE_OK (0).
+3. Run strace on 3 and it tells you the name of the file its looking for being iamspecial. Create a new file called iamspecial and google how to give 
+permission for the system to access the file using chmod.
+4. Run ./4 it will tell you it requires a shared library, run it with gdb, ltrace and strace and certain portions of machine code will tell you theres a function named secretoperations that returns a certain value.
+From there, you make a header file and a c file which contains one function which is secretoperations and it has two parameters. The outcome should be the sum of those 2 numbers plus 1. Run gcc -c -Wall -Werror -fpic yourfile.c
+to test compile the code then use gcc -shared -o lib361.so yourfile.o to create a shared library and finally export it using export LD_LIBRARY_PATH=./ and then run ./4 again to get the secret.
